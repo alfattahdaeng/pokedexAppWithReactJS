@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Card, Col, Row, Image, Button } from 'react-bootstrap';
+import { Card, Col, Row, Image, Button, Container } from 'react-bootstrap';
 import Stats from '../Components/Stats';
+import ScreenLayout from '../Components/ScreenLayout';
 import './DetailScreen.css';
 const DetailScreen = (props) => {
   const { pokeId } = props.match.params;
@@ -33,18 +34,18 @@ const DetailScreen = (props) => {
   }, []);
 
   return (
-    <div className='mt-5'>
-      <Card body style={{ height: '90vh' }}>
+    <ScreenLayout>
+      <div className='p-5'>
         <h1>{name}</h1>
         <Row>
-          <Col className='mt-2' xs={12} md={6}>
+          <Col className='pt-2' xs={12} md={6}>
             <Image
               src={`https://pokeres.bastionbot.org/images/pokemon/${pokeId}.png`}
               fluid
             />
           </Col>
 
-          <Col className='mt-2' xs={12} md={6}>
+          <Col className='pt-2' xs={12} md={6}>
             <h2>Stats</h2>
             <Row>
               <Stats hp={hp} defence={defence} attack={attack} />
@@ -68,8 +69,8 @@ const DetailScreen = (props) => {
             <Image className='mt-5 ' src={backImg} />
           </Col>
         </Row>
-      </Card>
-    </div>
+      </div>
+    </ScreenLayout>
   );
 };
 

@@ -8,10 +8,11 @@ import DetailScreen from './Pages/DetailScreen';
 const App = () => {
   return (
     <Router>
-      <Container>
+    
+      
         <Route path='/' component={HomeScreen} exact />
         <Route path='/details/:pokeId' component={DetailScreen} />
-      </Container>
+     
     </Router>
   );
 };
