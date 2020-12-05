@@ -31,9 +31,9 @@ const Header = () => {
           </Nav>
           <div className='ml-auto pr-2 pt-2 d-inline'>
             <p className='d-inline text-white'>TR</p>
-            <label class='switch mx-2'>
+            <label className='switch mx-2'>
               <input type='checkbox' />
-              <span class='slider round'></span>
+              <span className='slider round'></span>
             </label>
             <p className='d-inline text-white'>EN</p>
           </div>
