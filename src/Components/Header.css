@@ -1,4 +1,4 @@
-.navbar{
+.navbar-bg{
     background-color: #404040;
     border-bottom:1px solid black
 }
@@ -22,7 +22,7 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: red;
+    background-color: #DC0A16;
     -webkit-transition: .4s;
     transition: .4s;
   }
@@ -30,10 +30,10 @@
   .slider:before {
     position: absolute;
     content: "";
-    height: 18px;
-    width: 18px;
-    left: 4px;
-    bottom: 4px;
+    height: 26px;
+    width: 26px;
+    left: 0px;
+    bottom: 0px;
     background-color: white;
     -webkit-transition: .4s;
     transition: .4s;
@@ -52,10 +52,9 @@
     -ms-transform: translateX(18px);
     transform: translateX(18px);
   }
-  
-  /* Rounded sliders */
+
   .slider.round {
-    border-radius: 26px;
+    border-radius: 30px;
   }
   
   .slider.round:before {
