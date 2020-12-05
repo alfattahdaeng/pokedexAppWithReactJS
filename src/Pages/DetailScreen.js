@@ -1,12 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Card, Col, Row, Image, Button, Container } from 'react-bootstrap';
+import { useDispatch, useSelector } from 'react-redux';
+import { catchPokemon } from '../Actions/action';
+import { Col, Row, Image, Button } from 'react-bootstrap';
 import Stats from '../Components/Stats';
 import ScreenLayout from '../Components/ScreenLayout';
+
 import './DetailScreen.css';
+
 const DetailScreen = (props) => {
+  const dispatch = useDispatch();
+  const catchedPokemon = useSelector((state) => state.catchedPokemon);
+
   const { pokeId } = props.match.params;
-  const [pokeDetail, setPokeDetail] = useState();
+  const [pokemonDetail, setPokemonDetail] = useState([]);
   const [hp, setHp] = useState(0);
   const [attack, setAttack] = useState(0);
   const [defence, setDefence] = useState(0);
@@ -14,12 +21,12 @@ const DetailScreen = (props) => {
   const [height, setHeight] = useState(0);
   const [weight, setWeight] = useState(0);
   const [backImg, setBackImg] = useState('');
+
   useEffect(() => {
     axios
       .get(`https://pokeapi.co/api/v2/pokemon/${pokeId}`)
       .then((res) => {
-        console.log(res.data);
-        setPokeDetail(res.data);
+        setPokemonDetail(res.data);
         setHp(res.data.stats[0].base_stat);
         setAttack(res.data.stats[1].base_stat);
         setDefence(res.data.stats[2].base_stat);
@@ -31,8 +38,14 @@ const DetailScreen = (props) => {
       .catch((err) => {
         console.log(err);
       });
-  }, []);
+  }, [pokeId]);
 
+  const catchPokemonHandler = (pokemonDetail) => {
+    dispatch(catchPokemon(pokemonDetail));
+  };
+  const favPokemonHandler = () => {
+    console.log('store', catchedPokemon);
+  };
   return (
     <ScreenLayout>
       <div className='p-5'>
@@ -52,7 +65,7 @@ const DetailScreen = (props) => {
             </Row>
             <Row>
               <Col>
-                <h3>Height: {height}</h3>
+                <h3>Height: {height} </h3>
               </Col>
               <Col>
                 <h3>Weight: {weight}</h3>
@@ -60,10 +73,20 @@ const DetailScreen = (props) => {
             </Row>
             <Row>
               <Col>
-                <Button className='mt-5 ml-2'>Catch pokemon</Button>
+                <Button
+                  className='mt-5 ml-2'
+                  onClick={() => catchPokemonHandler(pokemonDetail)}
+                >
+                  Catch pokemon
+                </Button>
               </Col>
               <Col>
-                <Button className='mt-5 ml-2'>Add Favorite Pokemon</Button>
+                <Button
+                  className='mt-5 ml-2'
+                  onClick={() => favPokemonHandler(pokeId)}
+                >
+                  Add Favorite Pokemon
+                </Button>
               </Col>
             </Row>
             <Image className='mt-5 ' src={backImg} />
