@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Button, Card, Col, Container, Row } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { LinkContainer } from 'react-router-bootstrap';
@@ -7,15 +7,21 @@ import ScreenLayout from '../Components/ScreenLayout';
 const CatchedPokemonScreen = () => {
   const dispatch = useDispatch();
   const catchedPokemon = useSelector((state) => state.catchedPokemon);
+  const [visible, setVisible] = useState(30);
   console.log(catchedPokemon);
+  const showMoreHandler = () => {
+    setVisible((prevValue) => prevValue + 30);
+  };
+
   return (
     <ScreenLayout>
       {catchedPokemon.length === 0 ? (
         <h1>Pokemon yok</h1>
       ) : (
         <Container>
+        <h1>Catched Pokemons</h1>
           <Row className='m-2'>
-            {catchedPokemon.map((pokemon) => {
+            {catchedPokemon.slice(0, visible).map((pokemon) => {
               return (
                 <Col
                   xs={12}
@@ -28,7 +34,7 @@ const CatchedPokemonScreen = () => {
                     style={{
                       width: '18rem',
                       height: '31rem',
-                      backgroundImage: 'url(/images/background.png)',
+                      backgroundImage: 'url(/images/background1.png)',
                     }}
                     className='homescreen-card'
                   >
@@ -60,6 +66,11 @@ const CatchedPokemonScreen = () => {
               );
             })}
           </Row>
+          {catchedPokemon.length >= 30 && (
+            <div className='text-center my-4'>
+              <Button onClick={showMoreHandler}>Show More</Button>
+            </div>
+          )}
         </Container>
       )}
     </ScreenLayout>

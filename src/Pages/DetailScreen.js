@@ -7,6 +7,8 @@ import Stats from '../Components/Stats';
 import ScreenLayout from '../Components/ScreenLayout';
 
 import './DetailScreen.css';
+import Message from '../Components/Message';
+import Loader from '../Components/Loader';
 
 const DetailScreen = (props) => {
   const dispatch = useDispatch();
@@ -21,6 +23,7 @@ const DetailScreen = (props) => {
   const [height, setHeight] = useState(0);
   const [weight, setWeight] = useState(0);
   const [backImg, setBackImg] = useState('');
+  const [error, setError] = useState('');
 
   useEffect(() => {
     axios
@@ -37,6 +40,7 @@ const DetailScreen = (props) => {
       })
       .catch((err) => {
         console.log(err);
+        setError(err);
       });
   }, [pokeId]);
 
@@ -53,57 +57,63 @@ const DetailScreen = (props) => {
   return (
     <ScreenLayout>
       <div className='p-5'>
-        <h1>{name}</h1>
-        <Row>
-          <Col className='pt-2' xs={12} md={6}>
-            <Image
-              src={`https://pokeres.bastionbot.org/images/pokemon/${pokeId}.png`}
-              fluid
-            />
-          </Col>
+        {pokemonDetail.length === 0 ? (
+          <Loader />
+        ) : error ? (
+          <Message variant='danger'> {error}</Message>
+        ) : (
+          <>
+            <h1>{name}</h1>
+            <Row>
+              <Col className='pt-2' xs={12} md={6}>
+                <Image
+                  src={`https://pokeres.bastionbot.org/images/pokemon/${pokeId}.png`}
+                  fluid
+                />
+              </Col>
 
-          <Col className='pt-2' xs={12} md={6}>
-            <h2>Stats</h2>
-            <Row>
-              <Stats hp={hp} defence={defence} attack={attack} />
+              <Col className='pt-2' xs={12} md={6}>
+                <h2>Stats</h2>
+                <Row>
+                  <Stats hp={hp} defence={defence} attack={attack} />
+                </Row>
+                <Row>
+                  <Col>
+                    <h3>Height: {height} </h3>
+                  </Col>
+                  <Col>
+                    <h3>Weight: {weight}</h3>
+                  </Col>
+                </Row>
+                <Row>
+                  <Col>
+                    <Button
+                      className='mt-5 ml-2'
+                      onClick={() => catchPokemonHandler(pokemonDetail)}
+                    >
+                      Catch pokemon
+                    </Button>
+                    <Button
+                      className='mt-5 ml-2'
+                      onClick={() => releasePokemonHandler(pokemonDetail)}
+                    >
+                      Release pokemon
+                    </Button>
+                  </Col>
+                  <Col>
+                    <Button
+                      className='mt-5 ml-2'
+                      onClick={() => favPokemonHandler(pokeId)}
+                    >
+                      Add Favorite Pokemon
+                    </Button>
+                  </Col>
+                </Row>
+                <Image className='mt-5 ' src={backImg} />
+              </Col>
             </Row>
-            <Row>
-              <Col>
-                <h3>Height: {height} </h3>
-              </Col>
-              <Col>
-                <h3>Weight: {weight}</h3>
-              </Col>
-            </Row>
-            <Row>
-              <Col>
-
-              
-                <Button
-                  className='mt-5 ml-2'
-                  onClick={() => catchPokemonHandler(pokemonDetail)}
-                >
-                  Catch pokemon
-                </Button>
-                <Button
-                  className='mt-5 ml-2'
-                  onClick={() => releasePokemonHandler(pokemonDetail)}
-                >
-                  Release pokemon
-                </Button>
-              </Col>
-              <Col>
-                <Button
-                  className='mt-5 ml-2'
-                  onClick={() => favPokemonHandler(pokeId)}
-                >
-                  Add Favorite Pokemon
-                </Button>
-              </Col>
-            </Row>
-            <Image className='mt-5 ' src={backImg} />
-          </Col>
-        </Row>
+          </>
+        )}
       </div>
     </ScreenLayout>
   );
