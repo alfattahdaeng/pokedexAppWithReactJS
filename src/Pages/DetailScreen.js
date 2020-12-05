@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
-import { catchPokemon } from '../Actions/action';
+import { catchPokemon, releasePokemon } from '../Actions/action';
 import { Col, Row, Image, Button } from 'react-bootstrap';
 import Stats from '../Components/Stats';
 import ScreenLayout from '../Components/ScreenLayout';
@@ -43,6 +43,10 @@ const DetailScreen = (props) => {
   const catchPokemonHandler = (pokemonDetail) => {
     dispatch(catchPokemon(pokemonDetail));
   };
+
+  const releasePokemonHandler = (pokemonDetail) => {
+    dispatch(releasePokemon(pokemonDetail));
+  };
   const favPokemonHandler = () => {
     console.log('store', catchedPokemon);
   };
@@ -78,6 +82,12 @@ const DetailScreen = (props) => {
                   onClick={() => catchPokemonHandler(pokemonDetail)}
                 >
                   Catch pokemon
+                </Button>
+                <Button
+                  className='mt-5 ml-2'
+                  onClick={() => releasePokemonHandler(pokemonDetail)}
+                >
+                  Release pokemon
                 </Button>
               </Col>
               <Col>
