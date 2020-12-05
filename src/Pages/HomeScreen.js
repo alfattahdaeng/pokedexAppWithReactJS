@@ -6,7 +6,7 @@ import axios from 'axios';
 import ScreenLayout from '../Components/ScreenLayout';
 const HomeScreen = () => {
   const [pokemons, setPokemons] = useState([]);
-
+  const [visible, setVisible] = useState(30);
   useEffect(() => {
     axios
       .get('https://pokeapi.co/api/v2/pokemon?limit=300')
@@ -17,12 +17,15 @@ const HomeScreen = () => {
         console.log(err);
       });
   }, []);
+  const showMoreHandler = () => {
+    setVisible((prevValue) => prevValue + 30);
+  };
 
   return (
     <ScreenLayout>
       <Container>
         <Row className='m-2'>
-          {pokemons.map((pokemon) => {
+          {pokemons.slice(0, visible).map((pokemon) => {
             const pokeId = pokemon.url.split('/')[6];
             return (
               <Col xs={12} md={6} lg={4} key={pokeId} className='mt-3 '>
@@ -34,7 +37,7 @@ const HomeScreen = () => {
                   }}
                   className='homescreen-card'
                 >
-                  <div className=''>
+                  <div>
                     <h1 className=' text-white text-center my-3'>
                       {pokemon.name}
                     </h1>
@@ -42,13 +45,13 @@ const HomeScreen = () => {
                       variant='top'
                       src={`https://pokeres.bastionbot.org/images/pokemon/${pokeId}.png`}
                     />
-                    <i className='fas fa-heart fa-3x float-right mr-2 mb-1 homescreen-card__heardIcon' />
+                    <i className='fas fa-heart fa-3x float-right pr-2 pb-1 homescreen-card__heardIcon' />
                   </div>
 
                   <Card.Body>
                     <Row>
                       <Col md={4} xs={3}>
-                        <Button className=''> Catch</Button>
+                        <Button> Catch</Button>
                       </Col>
                       <Col>
                         <LinkContainer to={`/details/${pokeId}`}>
@@ -62,6 +65,9 @@ const HomeScreen = () => {
             );
           })}
         </Row>
+        <div className='text-center my-4'>
+          <Button onClick={showMoreHandler}>Show More</Button>
+        </div>
       </Container>
     </ScreenLayout>
   );
