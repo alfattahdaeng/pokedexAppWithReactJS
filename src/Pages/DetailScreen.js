@@ -77,6 +77,8 @@ const DetailScreen = (props) => {
             </Row>
             <Row>
               <Col>
+
+              
                 <Button
                   className='mt-5 ml-2'
                   onClick={() => catchPokemonHandler(pokemonDetail)}
