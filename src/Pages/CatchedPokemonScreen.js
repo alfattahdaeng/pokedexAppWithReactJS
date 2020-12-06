@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 import { Button, Card, Col, Container, Row } from 'react-bootstrap';
-import { useDispatch, useSelector } from 'react-redux';
+import {  useSelector } from 'react-redux';
 import { LinkContainer } from 'react-router-bootstrap';
+import FavPokemon from '../Components/FavPokemon';
 import ScreenLayout from '../Components/ScreenLayout';
 
 const CatchedPokemonScreen = () => {
-  const dispatch = useDispatch();
+  
   const catchedPokemon = useSelector((state) => state.catchedPokemon);
   const [visible, setVisible] = useState(30);
-  console.log(catchedPokemon);
   const showMoreHandler = () => {
     setVisible((prevValue) => prevValue + 30);
   };
@@ -19,7 +19,7 @@ const CatchedPokemonScreen = () => {
         <h1>Pokemon yok</h1>
       ) : (
         <Container>
-        <h1>Catched Pokemons</h1>
+          <h1>Catched Pokemons</h1>
           <Row className='m-2'>
             {catchedPokemon.slice(0, visible).map((pokemon) => {
               return (
@@ -46,20 +46,17 @@ const CatchedPokemonScreen = () => {
                         variant='top'
                         src={`https://pokeres.bastionbot.org/images/pokemon/${pokemon.pokemonId}.png`}
                       />
-                      <i className='fas fa-heart fa-3x float-right pr-2 pb-1 text-dark homescreen-card__heardIcon' />
+                      <FavPokemon pokeId={pokemon.pokemonId} />
                     </div>
 
                     <Card.Body>
-                      <Row>
-                        <Col md={4} xs={3}>
-                          <Button> Catch</Button>
-                        </Col>
-                        <Col>
+                      <div className='text-center '>
+                     
                           <LinkContainer to={`/details/${pokemon.pokemonId}`}>
-                            <Button className='ml-3'>More Info</Button>
+                            <Button size='lg'>More Info</Button>
                           </LinkContainer>
-                        </Col>
-                      </Row>
+                      
+                      </div>
                     </Card.Body>
                   </Card>
                 </Col>

@@ -23,6 +23,20 @@ export const reducer = (state = INITIAL_STATE, action) => {
         ),
       };
 
+    case 'FAV_POKEMON':
+      return {
+        ...state,
+        favPokemon: [...state.favPokemon, { favPokemonId: action.payload }],
+      };
+
+    case 'REMOVE_FAV_POKEMON':
+      return {
+        ...state,
+        favPokemon: state.favPokemon.filter(
+          (removePokemon) => removePokemon.favPokemonId !== action.payload
+        ),
+      };
+
     default:
       return state;
   }

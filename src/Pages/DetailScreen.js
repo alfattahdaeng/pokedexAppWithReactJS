@@ -51,9 +51,14 @@ const DetailScreen = (props) => {
   const releasePokemonHandler = (pokemonDetail) => {
     dispatch(releasePokemon(pokemonDetail));
   };
-  const favPokemonHandler = () => {
-    console.log('store', catchedPokemon);
+  const favPokemonHandler = (pokeId) => {
+    for (let i = 0; i < catchedPokemon.length; i++) {
+      console.log(catchedPokemon[i].pokemonId);
+      
+
+    }
   };
+
   return (
     <ScreenLayout>
       <div className='p-5'>
@@ -93,6 +98,7 @@ const DetailScreen = (props) => {
                     >
                       Catch pokemon
                     </Button>
+
                     <Button
                       className='mt-5 ml-2'
                       onClick={() => releasePokemonHandler(pokemonDetail)}
@@ -109,6 +115,7 @@ const DetailScreen = (props) => {
                     </Button>
                   </Col>
                 </Row>
+
                 <Image className='mt-5 ' src={backImg} />
               </Col>
             </Row>
