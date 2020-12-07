@@ -18,6 +18,7 @@ export const reducer = (state = INITIAL_STATE, action) => {
 
     case 'RELEASE_POKEMON':
       return {
+        ...state,
         catchedPokemon: state.catchedPokemon.filter(
           (releasePokemon) => releasePokemon.pokemon.id !== action.payload.id
         ),

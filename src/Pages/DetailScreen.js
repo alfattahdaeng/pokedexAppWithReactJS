@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { useDispatch, useSelector } from 'react-redux';
-import { catchPokemon, releasePokemon } from '../Actions/action';
+import {  useSelector } from 'react-redux';
 import { Col, Row, Image, Button } from 'react-bootstrap';
 import Stats from '../Components/Stats';
 import ScreenLayout from '../Components/ScreenLayout';
@@ -9,9 +8,9 @@ import ScreenLayout from '../Components/ScreenLayout';
 import './DetailScreen.css';
 import Message from '../Components/Message';
 import Loader from '../Components/Loader';
+import CatchedReleaseBtn from '../Components/CatchedReleaseBtn';
 
 const DetailScreen = (props) => {
-  const dispatch = useDispatch();
   const catchedPokemon = useSelector((state) => state.catchedPokemon);
 
   const { pokeId } = props.match.params;
@@ -44,18 +43,10 @@ const DetailScreen = (props) => {
       });
   }, [pokeId]);
 
-  const catchPokemonHandler = (pokemonDetail) => {
-    dispatch(catchPokemon(pokemonDetail));
-  };
-
-  const releasePokemonHandler = (pokemonDetail) => {
-    dispatch(releasePokemon(pokemonDetail));
-  };
+ 
   const favPokemonHandler = (pokeId) => {
     for (let i = 0; i < catchedPokemon.length; i++) {
       console.log(catchedPokemon[i].pokemonId);
-      
-
     }
   };
 
@@ -92,19 +83,11 @@ const DetailScreen = (props) => {
                 </Row>
                 <Row>
                   <Col>
-                    <Button
-                      className='mt-5 ml-2'
-                      onClick={() => catchPokemonHandler(pokemonDetail)}
-                    >
-                      Catch pokemon
-                    </Button>
-
-                    <Button
-                      className='mt-5 ml-2'
-                      onClick={() => releasePokemonHandler(pokemonDetail)}
-                    >
-                      Release pokemon
-                    </Button>
+                    <CatchedReleaseBtn
+                      pokeId={pokeId}
+                      pokemonDetail={pokemonDetail}
+                    />
+               
                   </Col>
                   <Col>
                     <Button

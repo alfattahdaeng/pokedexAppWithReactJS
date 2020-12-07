@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
 import { Button, Card, Col, Container, Row } from 'react-bootstrap';
-import {  useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { LinkContainer } from 'react-router-bootstrap';
 import FavPokemon from '../Components/FavPokemon';
 import ScreenLayout from '../Components/ScreenLayout';
 
 const CatchedPokemonScreen = () => {
-  
   const catchedPokemon = useSelector((state) => state.catchedPokemon);
   const [visible, setVisible] = useState(30);
   const showMoreHandler = () => {
@@ -51,11 +50,9 @@ const CatchedPokemonScreen = () => {
 
                     <Card.Body>
                       <div className='text-center '>
-                     
-                          <LinkContainer to={`/details/${pokemon.pokemonId}`}>
-                            <Button size='lg'>More Info</Button>
-                          </LinkContainer>
-                      
+                        <LinkContainer to={`/details/${pokemon.pokemonId}`}>
+                          <Button size='lg'>More Info</Button>
+                        </LinkContainer>
                       </div>
                     </Card.Body>
                   </Card>
