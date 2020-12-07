@@ -59,14 +59,15 @@ const HomeScreen = () => {
                           variant='top'
                           src={`https://pokeres.bastionbot.org/images/pokemon/${pokeId}.png`}
                         />
-
-                      
                       </div>
 
                       <Card.Body>
                         <div className='text-center mt-4'>
                           <LinkContainer to={`/details/${pokeId}`}>
-                            <Button size='lg'>More Info</Button>
+                            <Button size='lg'>
+                            More Info
+                            <i className='fas fa-info-circle text-white ml-3' />
+                            </Button>
                           </LinkContainer>
                         </div>
                       </Card.Body>

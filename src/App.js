@@ -5,6 +5,7 @@ import HomeScreen from './Pages/HomeScreen';
 import DetailScreen from './Pages/DetailScreen';
 import CatchedPokemonScreen from './Pages/CatchedPokemonScreen';
 import Header from './Components/Header';
+import FavoritePokemonScreen from './Pages/FavoritePokemonScreen';
 
 const App = () => {
   return (
@@ -14,6 +15,7 @@ const App = () => {
       <Route path='/' component={HomeScreen} exact />
       <Route path='/details/:pokeId' component={DetailScreen} />
       <Route path='/catchedPokemons' component={CatchedPokemonScreen} />
+      <Route path='/favoritePokemons' component={FavoritePokemonScreen} />
     </Router>
   );
 };

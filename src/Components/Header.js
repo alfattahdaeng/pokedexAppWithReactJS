@@ -1,5 +1,5 @@
 import React from 'react';
-import { Navbar, Nav} from 'react-bootstrap';
+import { Navbar, Nav } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
 import './Header.css';
 const Header = () => {
@@ -25,7 +25,7 @@ const Header = () => {
             <LinkContainer to='/catchedPokemons'>
               <Nav.Link>Catched Pokemon</Nav.Link>
             </LinkContainer>
-            <LinkContainer to='/'>
+            <LinkContainer to='/favoritePokemons'>
               <Nav.Link>Favorite Pokemon</Nav.Link>
             </LinkContainer>
           </Nav>
