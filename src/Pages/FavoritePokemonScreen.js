@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import ScreenLayout from '../Components/ScreenLayout';
 import { useSelector } from 'react-redux';
 import { Button, Card, Col, Container, Row } from 'react-bootstrap';
@@ -8,8 +8,11 @@ import { LinkContainer } from 'react-router-bootstrap';
 const FavoritePokemonScreen = () => {
   const catchedPokemons = useSelector((state) => state.catchedPokemon);
   const favPokemons = useSelector((state) => state.favPokemon);
-  console.log(favPokemons);
-  console.log({ catchedPokemons });
+  const [visible, setVisible] = useState(30);
+
+  const showMoreHandler = () => {
+    setVisible((prevValue) => prevValue + 30);
+  };
   return (
     <ScreenLayout>
       {favPokemons.length === 0 ? (
@@ -18,7 +21,7 @@ const FavoritePokemonScreen = () => {
         <Container>
           <h1>Favorites Pokemons</h1>
           <Row className='m-2'>
-            {favPokemons.map((favPokemon) => (
+            {favPokemons.slice(0, visible).map((favPokemon) => (
               <div>
                 {catchedPokemons.map(
                   (catchPokemon) =>
@@ -34,7 +37,7 @@ const FavoritePokemonScreen = () => {
                           style={{
                             width: '18rem',
                             height: '31rem',
-                            backgroundImage: 'url(/images/background2.png)',
+                            backgroundImage: 'url(/images/background9.png)',
                           }}
                           className='homescreen-card'
                         >
@@ -65,6 +68,11 @@ const FavoritePokemonScreen = () => {
               </div>
             ))}
           </Row>
+          {favPokemons.length >= 30 && (
+            <div className='text-center my-4'>
+              <Button onClick={showMoreHandler}>Show More</Button>
+            </div>
+          )}
         </Container>
       )}
     </ScreenLayout>

@@ -1,3 +1,5 @@
+import { releasePokemon } from '../Actions/action';
+
 const INITIAL_STATE = {
   catchedPokemon: [],
   favPokemon: [],
@@ -17,10 +19,14 @@ export const reducer = (state = INITIAL_STATE, action) => {
       };
 
     case 'RELEASE_POKEMON':
+      console.log(state.favPokemon);
       return {
         ...state,
         catchedPokemon: state.catchedPokemon.filter(
           (releasePokemon) => releasePokemon.pokemon.id !== action.payload.id
+        ),
+        favPokemon: state.favPokemon.filter(
+          (releasePokemon) => releasePokemon.favPokemonId !== action.payload.id
         ),
       };
 
