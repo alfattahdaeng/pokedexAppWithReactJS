@@ -32,6 +32,9 @@ const CatchedReleaseBtn = ({ pokeId, pokemonDetail }) => {
     <div>
       {catched ? (
         <Button
+          size='lg'
+          block
+          variant='danger'
           className='mt-5 ml-2 '
           onClick={() => catchReleasePokemonHandler(pokemonDetail)}
         >
@@ -39,6 +42,8 @@ const CatchedReleaseBtn = ({ pokeId, pokemonDetail }) => {
         </Button>
       ) : (
         <Button
+          size='lg'
+          block
           className='mt-5 ml-2'
           onClick={() => catchReleasePokemonHandler(pokemonDetail)}
         >

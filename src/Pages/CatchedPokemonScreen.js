@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import { Button, Card, Col, Container, Row } from 'react-bootstrap';
+import { Button, Card, Col, Container, Nav, Row } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import { LinkContainer } from 'react-router-bootstrap';
 import FavPokemon from '../Components/FavPokemon';
 import ScreenLayout from '../Components/ScreenLayout';
+import Message from '../Components/Message';
 
 const CatchedPokemonScreen = () => {
   const catchedPokemon = useSelector((state) => state.catchedPokemon);
@@ -15,10 +16,19 @@ const CatchedPokemonScreen = () => {
   return (
     <ScreenLayout>
       {catchedPokemon.length === 0 ? (
-        <h1>Pokemon yok</h1>
+        <Row className='mt-3 ml-2'>
+          <Col xs={12} md={6}>
+            <Message variant='danger'>
+              You dont catched pokemon. Go back
+              <LinkContainer className='d-inline' to='/'>
+                <Nav.Link>Pokemon screen</Nav.Link>
+              </LinkContainer>
+            </Message>
+          </Col>
+        </Row>
       ) : (
         <Container>
-          <h1>Catched Pokemons</h1>
+          <h1 className='mt-2'>You Catched {catchedPokemon.length} Pokemons</h1>
           <Row className='m-2'>
             {catchedPokemon.slice(0, visible).map((pokemon) => {
               return (

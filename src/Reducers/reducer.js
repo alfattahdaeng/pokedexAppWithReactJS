@@ -1,4 +1,3 @@
-import { releasePokemon } from '../Actions/action';
 
 const INITIAL_STATE = {
   catchedPokemon: [],

@@ -1,23 +1,23 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import {  useSelector } from 'react-redux';
-import { Col, Row, Image, Button } from 'react-bootstrap';
+import { Col, Row, Image,  } from 'react-bootstrap';
 import Stats from '../Components/Stats';
 import ScreenLayout from '../Components/ScreenLayout';
-
-import './DetailScreen.css';
 import Message from '../Components/Message';
 import Loader from '../Components/Loader';
 import CatchedReleaseBtn from '../Components/CatchedReleaseBtn';
 
-const DetailScreen = (props) => {
-  const catchedPokemon = useSelector((state) => state.catchedPokemon);
+import './DetailScreen.css';
 
+const DetailScreen = (props) => {
   const { pokeId } = props.match.params;
   const [pokemonDetail, setPokemonDetail] = useState([]);
   const [hp, setHp] = useState(0);
+  const [speed, setSpeed] = useState(0);
   const [attack, setAttack] = useState(0);
+  const [attack2, setAttack2] = useState(0);
   const [defence, setDefence] = useState(0);
+  const [defence2, setDefence2] = useState(0);
   const [name, setName] = useState('');
   const [height, setHeight] = useState(0);
   const [weight, setWeight] = useState(0);
@@ -32,6 +32,11 @@ const DetailScreen = (props) => {
         setHp(res.data.stats[0].base_stat);
         setAttack(res.data.stats[1].base_stat);
         setDefence(res.data.stats[2].base_stat);
+
+        setSpeed(res.data.stats[5].base_stat);
+        setAttack2(res.data.stats[3].base_stat);
+        setDefence2(res.data.stats[4].base_stat);
+
         setName(res.data.name);
         setHeight(res.data.height);
         setWeight(res.data.weight);
@@ -43,13 +48,6 @@ const DetailScreen = (props) => {
       });
   }, [pokeId]);
 
- 
-  const favPokemonHandler = (pokeId) => {
-    for (let i = 0; i < catchedPokemon.length; i++) {
-      console.log(catchedPokemon[i].pokemonId);
-    }
-  };
-
   return (
     <ScreenLayout>
       <div className='p-5'>
@@ -59,26 +57,50 @@ const DetailScreen = (props) => {
           <Message variant='danger'> {error}</Message>
         ) : (
           <>
-            <h1>{name}</h1>
+            <div className='text-center'>
+              <h1 className="detail-name">{name}</h1>
+            </div>
             <Row>
-              <Col className='pt-2' xs={12} md={6}>
+              <Col className='pt-2 border' xs={12} md={6}>
                 <Image
                   src={`https://pokeres.bastionbot.org/images/pokemon/${pokeId}.png`}
+                 
                   fluid
                 />
               </Col>
 
-              <Col className='pt-2' xs={12} md={6}>
-                <h2>Stats</h2>
-                <Row>
-                  <Stats hp={hp} defence={defence} attack={attack} />
-                </Row>
-                <Row>
+              <Col className='p m ' xs={12} md={6}>
+                <div className='border  p-4'>
+                  <div className='text-center'>
+                    <h2>Stats</h2>
+                  </div>
+                  <Row className='mt-3 border'>
+                    <Stats
+                      hp={hp}
+                      defence={defence}
+                      attack={attack}
+                      infoHp='Health Point'
+                      infoDef='Defence'
+                      infoAttack='Attack'
+                    />
+                  </Row>
+                  <Row className='mt-3 border'>
+                    <Stats
+                      hp={speed}
+                      defence={defence2}
+                      attack={attack2}
+                      infoHp='Speed'
+                      infoDef='Special Defence'
+                      infoAttack='Special Attack'
+                    />
+                  </Row>
+                </div>
+                <Row className='border p-4 m-1 mt-4'>
                   <Col>
-                    <h3>Height: {height} </h3>
+                    <h3>Height: {(height / 10).toFixed(1)} m </h3>
                   </Col>
                   <Col>
-                    <h3>Weight: {weight}</h3>
+                    <h3>Weight: {(weight / 10).toFixed(1)} kg</h3>
                   </Col>
                 </Row>
                 <Row>
@@ -87,18 +109,8 @@ const DetailScreen = (props) => {
                       pokeId={pokeId}
                       pokemonDetail={pokemonDetail}
                     />
-               
-                  </Col>
-                  <Col>
-                    <Button
-                      className='mt-5 ml-2'
-                      onClick={() => favPokemonHandler(pokeId)}
-                    >
-                      Add Favorite Pokemon
-                    </Button>
                   </Col>
                 </Row>
-
                 <Image className='mt-5 ' src={backImg} />
               </Col>
             </Row>

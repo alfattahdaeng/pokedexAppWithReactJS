@@ -57,6 +57,7 @@ const HomeScreen = () => {
                         </h1>
                         <Card.Img
                           variant='top'
+                          
                           src={`https://pokeres.bastionbot.org/images/pokemon/${pokeId}.png`}
                         />
                       </div>

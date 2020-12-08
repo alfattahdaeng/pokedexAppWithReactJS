@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import ScreenLayout from '../Components/ScreenLayout';
+import Message from '../Components/Message';
 import { useSelector } from 'react-redux';
-import { Button, Card, Col, Container, Row } from 'react-bootstrap';
+import { Button, Card, Col, Container, Nav, Row } from 'react-bootstrap';
 import FavPokemon from '../Components/FavPokemon';
 import { LinkContainer } from 'react-router-bootstrap';
 
@@ -16,13 +17,22 @@ const FavoritePokemonScreen = () => {
   return (
     <ScreenLayout>
       {favPokemons.length === 0 ? (
-        <h1>Fav pokemon yok</h1>
+        <Row className='mt-3 ml-2'>
+          <Col xs={12} md={6}>
+            <Message variant='danger'>
+              You dont have favorite pokemon. Go back
+              <LinkContainer className='d-inline' to='/catchedPokemons'>
+                <Nav.Link>Catched Pokemon</Nav.Link>
+              </LinkContainer>
+            </Message>
+          </Col>
+        </Row>
       ) : (
         <Container>
-          <h1>Favorites Pokemons</h1>
+          <h1 className="mt-2">You have {favPokemons.length} Favorites Pokemons</h1>
           <Row className='m-2'>
             {favPokemons.slice(0, visible).map((favPokemon) => (
-              <div>
+              <div key={favPokemon.favPokemonId}>
                 {catchedPokemons.map(
                   (catchPokemon) =>
                     catchPokemon.pokemonId === favPokemon.favPokemonId && (
