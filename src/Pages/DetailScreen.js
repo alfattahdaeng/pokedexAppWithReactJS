@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Col, Row, Image,  } from 'react-bootstrap';
+import { Col, Row, Image } from 'react-bootstrap';
 import Stats from '../Components/Stats';
 import ScreenLayout from '../Components/ScreenLayout';
 import Message from '../Components/Message';
@@ -22,6 +22,7 @@ const DetailScreen = (props) => {
   const [height, setHeight] = useState(0);
   const [weight, setWeight] = useState(0);
   const [backImg, setBackImg] = useState('');
+  const [frontImg, setFrontImg] = useState('');
   const [error, setError] = useState('');
 
   useEffect(() => {
@@ -40,7 +41,8 @@ const DetailScreen = (props) => {
         setName(res.data.name);
         setHeight(res.data.height);
         setWeight(res.data.weight);
-        setBackImg(res.data.sprites.front_default);
+        setFrontImg(res.data.sprites.front_default);
+        setBackImg(res.data.sprites.back_default);
       })
       .catch((err) => {
         console.log(err);
@@ -50,26 +52,27 @@ const DetailScreen = (props) => {
 
   return (
     <ScreenLayout>
-      <div className='p-5'>
+      <div className='px-5'>
         {pokemonDetail.length === 0 ? (
           <Loader />
         ) : error ? (
           <Message variant='danger'> {error}</Message>
         ) : (
           <>
-            <div className='text-center'>
-              <h1 className="detail-name">{name}</h1>
+            <div className='text-center '>
+              <Image className='pb-4' src={frontImg} />
+              <h1 className='detail-name d-inline'>{name}</h1>
+              <Image className='pb-4' src={backImg} />
             </div>
             <Row>
               <Col className='pt-2 border' xs={12} md={6}>
                 <Image
                   src={`https://pokeres.bastionbot.org/images/pokemon/${pokeId}.png`}
-                 
                   fluid
                 />
               </Col>
 
-              <Col className='p m ' xs={12} md={6}>
+              <Col xs={12} md={6}>
                 <div className='border  p-4'>
                   <div className='text-center'>
                     <h2>Stats</h2>
@@ -111,7 +114,6 @@ const DetailScreen = (props) => {
                     />
                   </Col>
                 </Row>
-                <Image className='mt-5 ' src={backImg} />
               </Col>
             </Row>
           </>
