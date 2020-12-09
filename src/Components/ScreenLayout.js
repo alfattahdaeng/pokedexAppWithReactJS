@@ -12,8 +12,8 @@ const ScreenLayout = ({ children }) => {
       <Container>
         <div className='pt-5'>
           <Card
-            style={{ height: '85vh', overflow: 'auto' }}
-            className='bg-muted mt-5'
+            style={{ height: '80vh', overflow: 'auto' }}
+            className='bg-muted mt-4'
           >
             {children}
           </Card>

@@ -6,6 +6,7 @@ import DetailScreen from './Pages/DetailScreen';
 import CatchedPokemonScreen from './Pages/CatchedPokemonScreen';
 import Header from './Components/Header';
 import FavoritePokemonScreen from './Pages/FavoritePokemonScreen';
+import Footer from './Components/Footer';
 
 const App = () => {
   return (
@@ -16,6 +17,7 @@ const App = () => {
       <Route path='/details/:pokeId' component={DetailScreen} />
       <Route path='/catchedPokemons' component={CatchedPokemonScreen} />
       <Route path='/favoritePokemons' component={FavoritePokemonScreen} />
+      <Footer className='pt-5' />
     </Router>
   );
 };
