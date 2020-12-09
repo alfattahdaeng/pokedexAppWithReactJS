@@ -1,6 +1,6 @@
 import React from 'react';
-import { Col, ProgressBar } from 'react-bootstrap';
 import Translator from './Translator';
+import { Col, ProgressBar } from 'react-bootstrap';
 
 const Stats = ({
   hp,
@@ -33,7 +33,9 @@ const Stats = ({
       </Col>
       <Col className='border rounded border-danger p-2  m-1'>
         <p className='text-center'>
-          <b><Translator turkish={infoAttackTr} english={infoAttackEn} /></b>
+          <b>
+            <Translator turkish={infoAttackTr} english={infoAttackEn} />
+          </b>
         </p>
         <ProgressBar variant='warning' animated now={attack} label={attack} />
       </Col>

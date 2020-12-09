@@ -1,23 +1,24 @@
 import React, { useState, useEffect } from 'react';
 
 import ScreenLayout from '../Components/ScreenLayout';
-import Loader from '../Components/Loader';
+import Translator from '../Components/Translator';
 import Message from '../Components/Message';
+import Loader from '../Components/Loader';
 import { Button, Card, Container, Row, Col } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
 
 import axios from 'axios';
 
 import './HomeScreen.css';
-import Translator from '../Components/Translator';
 
 const HomeScreen = () => {
   const [pokemons, setPokemons] = useState([]);
   const [visible, setVisible] = useState(30);
   const [error, setError] = useState('');
+
   useEffect(() => {
     axios
-      .get('https://pokeapi.co/api/v2/pokemon?limit=300')
+      .get('https://pokeapi.co/api/v2/pokemon?limit=1500')
       .then((res) => {
         setPokemons(res.data.results);
       })
@@ -56,10 +57,13 @@ const HomeScreen = () => {
                         <h1 className=' text-white text-center my-3'>
                           {pokemon.name}
                         </h1>
+
                         <Card.Img
                           variant='top'
                           src={`https://pokeres.bastionbot.org/images/pokemon/${pokeId}.png`}
                         />
+
+                        {/* <PokemonCardImg pokeId={pokeId} />*/}
                       </div>
 
                       <Card.Body>
