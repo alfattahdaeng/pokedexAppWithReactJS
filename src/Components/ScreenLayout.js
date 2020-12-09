@@ -5,7 +5,7 @@ const ScreenLayout = ({ children }) => {
   return (
     <div
       style={{
-        height: '100vh',
+        height: '95vh',
         backgroundImage: 'url(/images/background6.png)',
       }}
     >

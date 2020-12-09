@@ -19,7 +19,7 @@ const FavoritePokemonScreen = () => {
     <ScreenLayout>
       {favPokemons.length === 0 ? (
         <Row className='mt-3 ml-2'>
-          <Col xs={12} md={6}>
+          <Col xs={12} md={7}>
             <Message variant='danger'>
               <Translator
                 turkish={
