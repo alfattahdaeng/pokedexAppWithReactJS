@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import { Col, Row, Image } from 'react-bootstrap';
-import Stats from '../Components/Stats';
+
 import ScreenLayout from '../Components/ScreenLayout';
-import Message from '../Components/Message';
-import Loader from '../Components/Loader';
 import CatchedReleaseBtn from '../Components/CatchedReleaseBtn';
+import Translator from '../Components/Translator';
+import Loader from '../Components/Loader';
+import Message from '../Components/Message';
+import Stats from '../Components/Stats';
+import { Col, Row, Image } from 'react-bootstrap';
+
+import axios from 'axios';
 
 import './DetailScreen.css';
 
@@ -75,16 +78,21 @@ const DetailScreen = (props) => {
               <Col xs={12} md={6}>
                 <div className='border  p-4'>
                   <div className='text-center'>
-                    <h2>Stats</h2>
+                    <h2>
+                      <Translator turkish={'İstatistikler'} english={'Stats'} />
+                    </h2>
                   </div>
                   <Row className='mt-3 border'>
                     <Stats
                       hp={hp}
                       defence={defence}
                       attack={attack}
-                      infoHp='Health Point'
-                      infoDef='Defence'
-                      infoAttack='Attack'
+                      infoHpEn='Health'
+                      infoDefEn='Defence'
+                      infoAttackEn='Attack'
+                      infoHpTr='Sağlık'
+                      infoDefTr='Savunma'
+                      infoAttackTr='Saldırı'
                     />
                   </Row>
                   <Row className='mt-3 border'>
@@ -92,18 +100,27 @@ const DetailScreen = (props) => {
                       hp={speed}
                       defence={defence2}
                       attack={attack2}
-                      infoHp='Speed'
-                      infoDef='Special Defence'
-                      infoAttack='Special Attack'
+                      infoHpEn='Speed'
+                      infoDefEn='Special Defence'
+                      infoAttackEn='Special Attack'
+                      infoHpTr='Hız'
+                      infoDefTr='Özel Savunma'
+                      infoAttackTr='Özel Saldırı'
                     />
                   </Row>
                 </div>
                 <Row className='border p-4 m-1 mt-4'>
                   <Col>
-                    <h3>Height: {(height / 10).toFixed(1)} m </h3>
+                    <h3>
+                      <Translator turkish={'Boy: '} english={'Height: '} />
+                      {(height / 10).toFixed(1)} m{' '}
+                    </h3>
                   </Col>
                   <Col>
-                    <h3>Weight: {(weight / 10).toFixed(1)} kg</h3>
+                    <h3>
+                      <Translator turkish={'Kilo: '} english={'Weight: '} />
+                      {(weight / 10).toFixed(1)} kg
+                    </h3>
                   </Col>
                 </Row>
                 <Row>

@@ -1,7 +1,7 @@
-
 const INITIAL_STATE = {
   catchedPokemon: [],
   favPokemon: [],
+  language: [{ language: 'en' }],
 };
 export const reducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
@@ -18,7 +18,6 @@ export const reducer = (state = INITIAL_STATE, action) => {
       };
 
     case 'RELEASE_POKEMON':
-      console.log(state.favPokemon);
       return {
         ...state,
         catchedPokemon: state.catchedPokemon.filter(
@@ -43,6 +42,30 @@ export const reducer = (state = INITIAL_STATE, action) => {
         ),
       };
 
+    case 'TR_LANGUAGE':
+      return {
+        ...state,
+        language: state.language.map((language) => {
+          if (language.language === 'en') {
+            return {
+              language: 'tr',
+            };
+          }
+          return language;
+        }),
+      };
+    case 'EN_LANGUAGE':
+      return {
+        ...state,
+        language: state.language.map((language) => {
+          if (language.language === 'tr') {
+            return {
+              language: 'en',
+            };
+          }
+          return language;
+        }),
+      };
     default:
       return state;
   }

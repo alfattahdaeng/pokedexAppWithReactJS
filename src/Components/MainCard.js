@@ -1,8 +1,9 @@
 import React from 'react';
 import { Button, Col, Row } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
+import Translator from './Translator';
 
-const Card = ({bg, id, name}) => {
+const Card = ({ bg, id, name }) => {
   return (
     <>
       <Card
@@ -25,7 +26,12 @@ const Card = ({bg, id, name}) => {
             </Col>
             <Col>
               <LinkContainer to={`/details/${id}`}>
-                <Button className='ml-3'>More Info</Button>
+                <Button className='ml-3'>
+                  <Translator
+                    turkish={'Daha fazla bilgi'}
+                    english={' More Info'}
+                  />
+                </Button>
               </LinkContainer>
             </Col>
           </Row>

@@ -9,6 +9,7 @@ import { LinkContainer } from 'react-router-bootstrap';
 import axios from 'axios';
 
 import './HomeScreen.css';
+import Translator from '../Components/Translator';
 
 const HomeScreen = () => {
   const [pokemons, setPokemons] = useState([]);
@@ -57,7 +58,6 @@ const HomeScreen = () => {
                         </h1>
                         <Card.Img
                           variant='top'
-                          
                           src={`https://pokeres.bastionbot.org/images/pokemon/${pokeId}.png`}
                         />
                       </div>
@@ -66,8 +66,12 @@ const HomeScreen = () => {
                         <div className='text-center mt-4'>
                           <LinkContainer to={`/details/${pokeId}`}>
                             <Button size='lg'>
-                            More Info
-                            <i className='fas fa-info-circle text-white ml-3' />
+                              <Translator
+                                turkish={'Daha Fazla Bilgi'}
+                                english={'More Info'}
+                              />
+
+                              <i className='fas fa-info-circle text-white ml-3' />
                             </Button>
                           </LinkContainer>
                         </div>
@@ -81,7 +85,12 @@ const HomeScreen = () => {
         </Row>
         {pokemons.length >= 30 && (
           <div className='text-center my-4'>
-            <Button onClick={showMoreHandler}>Show More</Button>
+            <Button onClick={showMoreHandler}>
+              <Translator
+                turkish={'Daha Fazla Pokemon'}
+                english={'Show More'}
+              />
+            </Button>
           </div>
         )}
       </Container>

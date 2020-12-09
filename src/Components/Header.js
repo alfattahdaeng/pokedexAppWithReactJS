@@ -1,8 +1,22 @@
 import React from 'react';
-import { Navbar, Nav } from 'react-bootstrap';
+import { Navbar, Nav, Button } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
+import Translator from './Translator';
+
+import { trLanguage, enLanguage } from '../Actions/action';
+import { useDispatch } from 'react-redux';
+
 import './Header.css';
 const Header = () => {
+  const dispatch = useDispatch();
+
+  const trLanguageHandler = () => {
+    dispatch(trLanguage('tr'));
+  };
+  const enLanguageHandler = () => {
+    dispatch(enLanguage('en'));
+  };
+
   return (
     <>
       <Navbar variant='dark' expand='lg' className='navbar-bg' fixed='top'>
@@ -23,19 +37,41 @@ const Header = () => {
         <Navbar.Collapse id='basic-navbar-nav'>
           <Nav className='mr-auto'>
             <LinkContainer to='/catchedPokemons'>
-              <Nav.Link>Catched Pokemon</Nav.Link>
+              <Nav.Link>
+                <Translator
+                  turkish={'Yakalanan Pokemon'}
+                  english={'Catched Pokemon '}
+                />
+              </Nav.Link>
             </LinkContainer>
             <LinkContainer to='/favoritePokemons'>
-              <Nav.Link>Favorite Pokemon</Nav.Link>
+              <Nav.Link>
+                <Translator
+                  turkish={'Favori Pokemonlar'}
+                  english={' Favorite Pokemon'}
+                />
+              </Nav.Link>
             </LinkContainer>
           </Nav>
           <div className='ml-auto pr-2 pt-2 d-inline'>
-            <p className='d-inline text-white'>TR</p>
-            <label className='switch mx-2'>
-              <input type='checkbox' />
-              <span className='slider round'></span>
-            </label>
-            <p className='d-inline text-white'>EN</p>
+            <div className='text-white d-inline mr-2'>
+              <Translator turkish={'Dil: '} english={'Language: '} />
+            </div>
+
+            <Button
+              className='border p-1 mx-1'
+              onClick={() => trLanguageHandler()}
+              variant='light'
+            >
+              TR
+            </Button>
+            <Button
+              className='p-1 mx-1 '
+              onClick={() => enLanguageHandler()}
+              variant='light'
+            >
+              EN
+            </Button>
           </div>
         </Navbar.Collapse>
       </Navbar>
