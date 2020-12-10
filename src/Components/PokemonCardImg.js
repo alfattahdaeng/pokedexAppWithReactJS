@@ -7,8 +7,8 @@ const PokemonCardImg = ({ pokeId }) => {
   const [error, setError] = useState(false);
 
   // Bu işlemin kodu yavaslattığıunı düşünüyorum.
-  //Fakat resmi olmayan pokemonların bilgisini
-  // kullanıcıya göstermek istediğim için bu yönetimi kullandım
+  //Resmi olmayan pokemonlar için resim placeholderı koymak istediğim için bu yöntemi kullandım
+  // Kodu yavaslattıgı için bu componenti projeden çıkardım.
   useEffect(() => {
     axios
       .get(`https://pokeres.bastionbot.org/images/pokemon/${pokeId}.png`)
