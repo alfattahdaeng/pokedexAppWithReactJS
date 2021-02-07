@@ -5,12 +5,25 @@
 
 </p>
 
-<hr/>
 I created a simple Pokédex application using Poke API and React.
 
 Demo link: https://confident-babbage-9d4b30.netlify.app/
 
-![](src/ScreenShots/screen-1)
+
+## Screens
+
+<img src="Screenshots/screen-1.PNG" width=800>
+
+ #### Details Screen
+ 
+<img src="Screenshots/screen-2 details.PNG" width=800>
+<div>
+  
+ #### Catched and Fav Pokemons
+ 
+<img src="Screenshots/screen-3 catched pokemons.PNG" width=400>
+<img src="Screenshots/screen-4 fav pokemons.PNG" width=400>
+</div>
 
 ### Features:
 
