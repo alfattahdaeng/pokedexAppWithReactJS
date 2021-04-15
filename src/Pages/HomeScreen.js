@@ -1,105 +1,88 @@
-import React, { useState, useEffect } from 'react';
-
+import React, {useState, useEffect} from 'react'
+import CardDeck from '../Components/CardDex'
+import SearchBar from '../Components/SearchBar'
+import axios from 'axios'
+import ErrorPage from '../Components/ErrorPage'
 import ScreenLayout from '../Components/ScreenLayout';
-import Translator from '../Components/Translator';
-import Message from '../Components/Message';
-import Loader from '../Components/Loader';
-import { Button, Card, Container, Row, Col } from 'react-bootstrap';
+import { Image, Nav } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
 
-import axios from 'axios';
+import '../Styles/app.css';
 
-import './HomeScreen.css';
+const NUM_OF_POKEDEX_TO_DISPLAY = 50
 
 const HomeScreen = () => {
-  const [pokemons, setPokemons] = useState([]);
-  const [visible, setVisible] = useState(30);
-  const [error, setError] = useState('');
+  const pokemonRandomMonsterUrl = `https://pokeapi.co/api/v2/pokemon?limit=${NUM_OF_POKEDEX_TO_DISPLAY}`
+  const [pokemonNames, setPokemonNames] = useState(null)
+  const [pokemonNameToSearch, setPokemonNameToSearch] = useState([])
+  const [pokemonNameToSearchFound, setPokemonNameToSearchFound] = useState(false)
 
-  useEffect(() => {
-    axios
-      .get('https://pokeapi.co/api/v2/pokemon?limit=1500')
-      .then((res) => {
-        setPokemons(res.data.results);
+
+  useEffect(()=>{
+    axios(pokemonRandomMonsterUrl)
+      .catch(err => console.err(err))
+      .then(res => {  
+        let names = []
+        let urls = []
+
+        for(let i=0; i< res.data.results.length; ++i){
+          names.push(res.data.results[i].name)
+          urls.push(res.data.results[i].url)
+        }
+
+        setPokemonNames(names)
       })
-      .catch((err) => {
-        console.log(err);
-        setError(err);
-      });
-  }, []);
-  const showMoreHandler = () => {
-    setVisible((prevValue) => prevValue + 30);
-  };
+  },[pokemonRandomMonsterUrl])
 
-  return (
-    <ScreenLayout>
-      <Container>
-        <Row className='m-2'>
-          {pokemons.length === 0 ? (
-            <Loader />
-          ) : error ? (
-            <Message variant='danger'>{error}</Message>
-          ) : (
-            <>
-              {pokemons.slice(0, visible).map((pokemon) => {
-                const pokeId = pokemon.url.split('/')[6];
-                return (
-                  <Col xs={12} md={6} lg={4} key={pokeId} className='mt-3 '>
-                    <Card
-                      style={{
-                        width: '18rem',
-                        height: '31rem',
-                        backgroundImage: 'url(/images/background3.png)',
-                      }}
-                      className='homescreen-card'
-                    >
-                      <div>
-                        <h1 className=' text-white text-center my-3'>
-                          {pokemon.name}
-                        </h1>
-
-                        <Card.Img
-                          variant='top'
-                          src={`https://pokeres.bastionbot.org/images/pokemon/${pokeId}.png`}
-                        />
-
-                        {/* <PokemonCardImg pokeId={pokeId} />*/}
-                      </div>
-
-                      <Card.Body>
-                        <div className='text-center mt-4'>
-                          <LinkContainer to={`/details/${pokeId}`}>
-                            <Button size='lg'>
-                              <Translator
-                                turkish={'Daha Fazla Bilgi'}
-                                english={'More Info'}
-                              />
-
-                              <i className='fas fa-info-circle text-white ml-3' />
-                            </Button>
-                          </LinkContainer>
-                        </div>
-                      </Card.Body>
-                    </Card>
-                  </Col>
-                );
-              })}
-            </>
-          )}
-        </Row>
-        {pokemons.length >= 30 && (
-          <div className='text-center my-4'>
-            <Button onClick={showMoreHandler}>
-              <Translator
-                turkish={'Daha Fazla Pokemon'}
-                english={'Show More'}
-              />
-            </Button>
+ return(
+    <div>
+      <ScreenLayout>
+          <div className='navi home'>
+            <LinkContainer to='/'>
+              <Nav.Link>
+                <Image
+                  src={`../Images/pokeball.png`}
+                />
+              </Nav.Link>
+            </LinkContainer>
+            <div className='ml-auto'>
+              <LinkContainer to='/favorites'>
+                <Nav.Link>
+                  <i className="fas fa-list"></i>
+                </Nav.Link>
+              </LinkContainer>
+            </div>
           </div>
-        )}
-      </Container>
-    </ScreenLayout>
+        <h3 className="mb-4 mt-4 px-3 font-weight-bold">Pokedex</h3>
+
+        <SearchBar 
+          pokemonNames = {pokemonNames}
+          pokemonNameToSearch = {pokemonNameToSearch}
+          setPokemonNameToSearch = {setPokemonNameToSearch}
+          setPokemonNameToSearchFound = {setPokemonNameToSearchFound}
+        />
+        {/* Default */}
+        {pokemonNameToSearch && pokemonNames && pokemonNameToSearchFound &&
+          typeof pokemonNameToSearch === "object" && <CardDeck pokemonNameToSearch ={pokemonNames} pokemonNameToSearchFound = {pokemonNameToSearchFound}/>
+        }
+
+        {/* Reset Button Clicked */}
+        {pokemonNameToSearch && pokemonNames && !pokemonNameToSearchFound &&
+          typeof pokemonNameToSearch === "object" && <CardDeck pokemonNameToSearch ={pokemonNames} pokemonNameToSearchFound = {pokemonNameToSearchFound}/>
+        }
+        
+        {/* Valid Submission */}
+        {pokemonNameToSearch && pokemonNames && pokemonNameToSearchFound &&
+          typeof pokemonNameToSearch === "string"
+          && <CardDeck pokemonNameToSearch ={pokemonNameToSearch} pokemonNameToSearchFound = {pokemonNameToSearchFound}/>
+        }
+
+        {/* Invalid Submission */}
+        {pokemonNameToSearch && pokemonNames && !pokemonNameToSearchFound &&
+          typeof pokemonNameToSearch === "string" && <ErrorPage />
+        }
+      </ScreenLayout>
+    </div>
   );
 };
-
 export default HomeScreen;

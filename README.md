@@ -1,41 +1,19 @@
 <br />
 <p align="center">
 
-  <h1 align="center">Pokemon App</h1>
+  <h1 align="center">Pokedex App using Reactjs</h1>
 
 </p>
 
-I created a simple Pokédex application using Poke API and React.
+Pokédex application using Poke API and React (for test purposes).
 
-Demo link: https://confident-babbage-9d4b30.netlify.app/
-
-
-## Screens
-
-<img src="Screenshots/screen-1.PNG" width=800>
-
- #### Details Screen
- 
-<img src="Screenshots/screen-2 details.PNG" width=800>
-<div>
-  
- #### Catched and Fav Pokemons
- 
-<img src="Screenshots/screen-3 catched pokemons.PNG" width=400>
-<img src="Screenshots/screen-4 fav pokemons.PNG" width=400>
-</div>
+Demo link: https://pokedex-alfattah.netlify.app/
 
 ### Features:
 
-- List pokémons using the API
-- Show pokémon details
-- Catch pokémons and keep the déx record in Redux
-- Release pokémons
-- List caught pokémons
-- Pagination
-- Add/remove favorite caught pokémons
-- Language support
-- Responsive design
+- List and Search pokémons using the API
+- Show pokémon details 
+- Add/remove favorite pokémons
 
 ### Built With
 
@@ -50,10 +28,10 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 ### Installation & Run
 
 ```sh
- git clone https://github.com/mertcancet/pokemonApp
- cd pokemonApp
- npm install
- npm run start
+ git clone https://github.com/alfatahdaeng/pokedexAppWithReactJS
+ cd pokedexAppReactJS
+ yarn install
+ yarn start
 ```
 
 Runs the app in the development mode.

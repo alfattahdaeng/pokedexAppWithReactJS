@@ -1,44 +1,87 @@
 import React from 'react';
-import Translator from './Translator';
-import { Col, ProgressBar } from 'react-bootstrap';
+import { Row, Col, ProgressBar } from 'react-bootstrap';
 
-const Stats = ({
-  hp,
-  defence,
-  attack,
-  infoHpEn,
-  infoDefEn,
-  infoAttackEn,
-  infoHpTr,
-  infoDefTr,
-  infoAttackTr,
-}) => {
+const Stats = ( {hp,defence,attack,speed,spdefence,spattack} ) => {
   return (
     <>
-      <Col className='border border-dark rounded p-2 m-1'>
-        <p className='text-center'>
-          <b>
-            <Translator turkish={infoHpTr} english={infoHpEn} />
-          </b>
-        </p>
-        <ProgressBar variant='danger' animated now={hp} label={hp} />
-      </Col>
-      <Col className='border border-success rounded p-2  m-1'>
-        <p className='text-center'>
-          <b>
-            <Translator turkish={infoDefTr} english={infoDefEn} />
-          </b>
-        </p>
-        <ProgressBar variant='primary' animated now={defence} label={defence} />
-      </Col>
-      <Col className='border rounded border-danger p-2  m-1'>
-        <p className='text-center'>
-          <b>
-            <Translator turkish={infoAttackTr} english={infoAttackEn} />
-          </b>
-        </p>
-        <ProgressBar variant='warning' animated now={attack} label={attack} />
-      </Col>
+      <Row className='stat'>
+        <Col xs={2} className=''>
+          <p>
+            Hp
+          </p>
+        </Col>
+        <Col xs={2} className='text-center'>
+          <p>{hp}</p>
+        </Col>
+        <Col xs={8} className=''>
+          <ProgressBar variant='success' animated now={hp} />
+        </Col>
+      </Row>
+      <Row className='stat'>
+        <Col xs={2} className=''>
+          <p>
+            Attack
+          </p>
+        </Col>
+        <Col xs={2} className='text-center'>
+          <p>{attack}</p>
+        </Col>
+        <Col xs={8} className=''>
+          <ProgressBar variant='danger' animated now={attack} />
+        </Col>
+      </Row>
+      <Row className='stat'>
+        <Col xs={2} className=''>
+          <p>
+            Defense
+          </p>
+        </Col>
+        <Col xs={2} className='text-center'>
+          <p>{defence}</p>
+        </Col>
+        <Col xs={8} className=''>
+          <ProgressBar variant='danger' animated now={defence} />
+        </Col>
+      </Row>
+      <Row className='stat'>
+        <Col xs={2} className=''>
+          <p>
+            Sp.Atk
+          </p>
+        </Col>
+        <Col xs={2} className='text-center'>
+          <p>{spattack}</p>
+        </Col>
+        <Col xs={8} className=''>
+          <ProgressBar variant='success' animated now={spattack} />
+        </Col>
+      </Row>
+      <Row className='stat'>
+        <Col xs={2} className=''>
+          <p>
+            Sp.Def
+          </p>
+        </Col>
+        <Col xs={2} className='text-center'>
+          <p>{spdefence}</p>
+        </Col>
+        <Col xs={8} className=''>
+          <ProgressBar variant='success' animated now={spdefence} />
+        </Col>
+      </Row>
+      <Row className='stat'>
+        <Col xs={2} className=''>
+          <p>
+            Speed
+          </p>
+        </Col>
+        <Col xs={2} className='text-center'>
+          <p>{speed}</p>
+        </Col>
+        <Col xs={8} className=''>
+          <ProgressBar variant='primary' animated now={speed} />
+        </Col>
+      </Row>
     </>
   );
 };

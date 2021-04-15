@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Card } from 'react-bootstrap';
-import Translator from './Translator';
 
 const PokemonCardImg = ({ pokeId }) => {
   const [error, setError] = useState(false);
@@ -25,10 +24,7 @@ const PokemonCardImg = ({ pokeId }) => {
     <>
       {error ? (
         <h4 className='text-center text-white '>
-          <Translator
-            turkish={'Resim yüklenemedi. Lütfen daha sonra tekrar deneyiniz'}
-            english={'Picture couldnt upload. Please try again later.'}
-          />
+          Picture couldnt upload. Please try again later.
         </h4>
       ) : (
         <Card.Img

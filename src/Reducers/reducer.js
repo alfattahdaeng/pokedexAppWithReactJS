@@ -41,31 +41,6 @@ export const reducer = (state = INITIAL_STATE, action) => {
           (removePokemon) => removePokemon.favPokemonId !== action.payload
         ),
       };
-
-    case 'TR_LANGUAGE':
-      return {
-        ...state,
-        language: state.language.map((language) => {
-          if (language.language === 'en') {
-            return {
-              language: 'tr',
-            };
-          }
-          return language;
-        }),
-      };
-    case 'EN_LANGUAGE':
-      return {
-        ...state,
-        language: state.language.map((language) => {
-          if (language.language === 'tr') {
-            return {
-              language: 'en',
-            };
-          }
-          return language;
-        }),
-      };
     default:
       return state;
   }

@@ -1,25 +1,15 @@
 import React from 'react';
-import { Card, Container } from 'react-bootstrap';
+import { Container } from 'react-bootstrap';
 
 const ScreenLayout = ({ children }) => {
   return (
-    <div
-      style={{
-        height: '95vh',
-        backgroundImage: 'url(/images/background6.png)',
-      }}
+    <main className="main"
     >
+
       <Container>
-        <div className='pt-5'>
-          <Card
-            style={{ height: '80vh', overflow: 'auto' }}
-            className='bg-muted mt-4'
-          >
             {children}
-          </Card>
-        </div>
       </Container>
-    </div>
+    </main>
   );
 };
 
